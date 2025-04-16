@@ -8,12 +8,12 @@
 import Foundation
 
 protocol HttpUtilityProtocol {
-    func load<T: Codable>(urlStr: String) async throws -> T
+    func load<T: Codable>(from urlStr: String) async throws -> T
 }
 
 final class HttpUtility: HttpUtilityProtocol {
     
-    func load<T: Codable>(urlStr: String) async throws -> T {
+    func load<T: Codable>(from urlStr: String) async throws -> T {
         guard let url = URL(string: urlStr) else {
             throw NetworkError.invalidUrl
         }
