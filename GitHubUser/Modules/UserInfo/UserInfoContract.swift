@@ -11,7 +11,7 @@ import Foundation
 
 // MARK: View Output (Presenter -> View)
 protocol PresenterToViewUserInfoProtocol {
-   
+    func showUserInformation(with name: String, imageUrl: URL)
 }
 
 
@@ -21,6 +21,8 @@ protocol ViewToPresenterUserInfoProtocol {
     var view: PresenterToViewUserInfoProtocol? { get set }
     var interactor: PresenterToInteractorUserInfoProtocol? { get set }
     var router: PresenterToRouterUserInfoProtocol? { get set }
+    
+    func viewDidLoad()
 }
 
 
@@ -28,12 +30,16 @@ protocol ViewToPresenterUserInfoProtocol {
 protocol PresenterToInteractorUserInfoProtocol {
     
     var presenter: InteractorToPresenterUserInfoProtocol? { get set }
+    var httpUtility: HttpUtilityProtocol { get set }
+    
+    func fetchUserInformation()
 }
 
 
 // MARK: Interactor Output (Interactor -> Presenter)
 protocol InteractorToPresenterUserInfoProtocol {
-    
+    func fetchUserInformationSuccessfully(with user: GitUser)
+    func failedToFetchUserInformation(with error: NetworkError)
 }
 
 
